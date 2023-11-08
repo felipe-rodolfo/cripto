@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  max-width: 1080px;
+}
+
+.logo {
+  margin-top: 20px;
+  transition: all ease 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
