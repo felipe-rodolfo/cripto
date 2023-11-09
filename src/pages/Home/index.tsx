@@ -1,10 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './home.module.css';
 import { BiSearch } from 'react-icons/bi';
-import { useEffect, useState } from 'react';
-
-
-//https://coinlib.io/api/v1/coinlist?key=d30639e2a6a1eb52&pref=BTC&page=1&order=volume_desc
+import { FormEvent, useEffect, useState } from 'react';
 
 interface CoinsProps {
   name: string,
@@ -23,6 +20,8 @@ interface DataProps {
 
 export function Home(){
   const [coins, setCoins] = useState<CoinsProps[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     function getData(){
@@ -55,10 +54,18 @@ export function Home(){
     getData()
   }, [])
 
+  function handleSearch(e: FormEvent){
+    e.preventDefault();
+    if(inputValue === "") return;
+    console.log("=================" + inputValue);
+    navigate(`/detail/${inputValue}`)
+  }
+
   return (
     <main className={styles.container}>
-      <form className={styles.form}>
-        <input type="text" placeholder="Digite o símbolo da moeda"/>
+      <form className={styles.form} onSubmit={handleSearch}>
+        <input type="text" placeholder="Digite o símbolo da moeda" value={inputValue} 
+          onChange={(e) => setInputValue(e.target.value)}/>
         <button type='submit'>
           <BiSearch size={30} color="#FFF" />
         </button>
