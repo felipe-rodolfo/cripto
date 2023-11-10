@@ -57,7 +57,6 @@ export function Home(){
   function handleSearch(e: FormEvent){
     e.preventDefault();
     if(inputValue === "") return;
-    console.log("=================" + inputValue);
     navigate(`/detail/${inputValue}`)
   }
 
