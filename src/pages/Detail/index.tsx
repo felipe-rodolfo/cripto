@@ -2,67 +2,66 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from './detail.module.css';
 import { useEffect, useState } from 'react';
 
+interface CoinProp {
+  symbol: string;
+  name: string;
+  price: string;
+  market_cap: string;
+  low_24h: string;
+  high_24h: string;
+  total_volume_24h: string;
+  delta_24h: string | number;
+  formatedPrice: string;
+  formatedMarket: string;
+  formatedLowPrice: string;
+  formatedHighPrice: string;
+  error?: string;
+}
 
-export function Detail(){
-
-  const {cripto} = useParams();
+export function Detail() {
+  const { cripto } = useParams();
   const [detail, setDetail] = useState<CoinProp>();
   const [loading, setLoading] = useState(true);
-
-  interface CoinProp{
-    symbol: string,
-    name: string, 
-    price: string,
-    market_cap: string, 
-    low_24h: string,
-    high_24h: string,
-    total_volume_24h: string,
-    delta_24h: string | number,
-    formatedPrice: string,
-    formatedMarket: string,
-    formatedLowPrice: string,
-    formatedHighPrice: string,
-    error?: string
-  }
-
   const navigate = useNavigate();
 
-  useEffect(() => {
-    function getData(){
-      fetch(`https://sujeitoprogramador.com/api-cripto/coin/?key=d30639e2a6a1eb52&pref=BRL&symbol=${cripto}`)
-      .then((response) => response.json())
-      .then((data: CoinProp) => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`https://sujeitoprogramador.com/api-cripto/coin/?key=d30639e2a6a1eb52&pref=BRL&symbol=${cripto}`);
+      const data = await response.json();
 
-        let price = Intl.NumberFormat("pt-BR", {
+      const formatPrice = (value: number) => {
+        const priceFormatter = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL"
-        })
+          currency: "BRL",
+        });
+        return priceFormatter.format(value);
+      };
 
-        const resultData = {
-          ...data,
-          formatedPrice: price.format(Number(data.price)),
-          formatedMarket: price.format(Number(data.market_cap)),
-          formatedLowPrice: price.format(Number(data.low_24h)),
-          formatedHighPrice: price.format(Number(data.high_24h)),
-        }
+      const resultData = {
+        ...data,
+        formatedPrice: formatPrice(Number(data.price)),
+        formatedMarket: formatPrice(Number(data.market_cap)),
+        formatedLowPrice: formatPrice(Number(data.low_24h)),
+        formatedHighPrice: formatPrice(Number(data.high_24h)),
+      };
 
-        setDetail(resultData);
-        setLoading(false);
-      })
-      .catch(() => {
-          navigate("/");
-      })
+      setDetail(resultData);
+      setLoading(false);
+    } catch (error) {
+      navigate("/");
     }
+  };
 
-    getData();
-  }, [cripto])
+  useEffect(() => {
+    fetchData();
+  }, [cripto]);
 
-  if(loading){
+  if (loading) {
     return (
       <div className={styles.container}>
         <h4 className={styles.center}>Carregando informações...</h4>
       </div>
-    )
+    );
   }
 
   return (
@@ -74,9 +73,14 @@ export function Detail(){
         <p><strong>Preço:</strong> {detail?.formatedPrice}</p>
         <p><strong>Maior preço 24h:</strong> {detail?.formatedHighPrice}</p>
         <p><strong>Menor preço 24h:</strong> {detail?.formatedLowPrice}</p>
-        <p><strong>Delta 24h:</strong> <span className={parseInt(detail?.delta_24h) >= 0 ? styles.profit : styles.loss}>{detail?.delta_24h}</span></p>
+        <p>
+          <strong>Delta 24h:</strong>{" "}
+          <span className={parseInt(detail?.delta_24h) >= 0 ? styles.profit : styles.loss}>
+            {detail?.delta_24h}
+          </span>
+        </p>
         <p><strong>Valor mercado:</strong> {detail?.formatedMarket}</p>
       </section>
     </div>
-  )
+  );
 }
