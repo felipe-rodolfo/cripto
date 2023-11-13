@@ -14,10 +14,6 @@ interface CoinsProps {
   formatedMarket: string;
 }
 
-interface DataProps {
-  coins: CoinsProps[];
-}
-
 export function Home() {
   const [coins, setCoins] = useState<CoinsProps[]>([]);
   const [inputValue, setInputValue] = useState("");
@@ -57,7 +53,7 @@ export function Home() {
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
     if (inputValue === "") return;
-    navigate(`/detail/${inputValue}`);
+    navigate(`./detail/${inputValue}`);
   };
 
   return (
@@ -87,7 +83,7 @@ export function Home() {
           {coins.map(({ name, symbol, formatedMarket, formatedPrice, delta_24h }) => (
             <tr key={name} className={styles.tr}>
               <td data-label="Moeda" className={styles.label}>
-                <Link className={styles.link} to={`/detail/${symbol}`}>
+                <Link className={styles.link} to={`cripto/detail/${symbol}`}>
                   <span>{name}</span> | {symbol}
                 </Link>
               </td>

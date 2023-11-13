@@ -75,7 +75,7 @@ export function Detail() {
         <p><strong>Menor preço 24h:</strong> {detail?.formatedLowPrice}</p>
         <p>
           <strong>Delta 24h:</strong>{" "}
-          <span className={parseInt(detail?.delta_24h) >= 0 ? styles.profit : styles.loss}>
+          <span className={parseInt(String(detail?.delta_24h)) >= 0 ? styles.profit : styles.loss}>
             {detail?.delta_24h}
           </span>
         </p>

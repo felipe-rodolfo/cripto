@@ -5,7 +5,7 @@ export function NotFound(){
   return (
     <div className={styles.container}>
       <h1>Página NotFound</h1>
-      <Link to="/">
+      <Link to="./">
         Acessar cripto moedas
       </Link>
     </div>
