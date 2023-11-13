@@ -1,27 +1,35 @@
-# React + TypeScript + Vite
+<h1 align="center">
+    Cripto - Stay updated on Bitcoin, Ethereum, and other cryptocurrencies.
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h4 align="center">
+  Application to stay informed about cryptocurrencies, allowing users to search for a specific coin and display more details.
+</h4>
 
-Currently, two official plugins are available:
+## Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este projeto foi desenvolvido com as seguintes tecnologias:
 
-## Expanding the ESLint configuration
+-  [ReactJS](https://react.dev/)
+-  [React Router v6](https://github.com/ReactTraining/react-router)
+-  [VS Code][https://code.visualstudio.com/]
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Como usar
 
-- Configure the top-level `parserOptions` property like this:
+Para clonar e executar este aplicativo, você precisará do [Git] (https://git-scm.com), [Node.js v14.16.0] [nodejs] ou superior + [NPM v6.14.11] [npm] ou superior instalado no seu computador. Na sua linha de comando: 
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+# Clone este repositório
+$ git clone https://github.com/felipe-rodolfo/cripto.git
+
+# Vá para o repositório
+$ cd cripto
+
+# Instale as dependências
+$ npm install
+
+# Execute o aplicativo
+$ npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Feito com ♥ por Felipe Rodolfo: [Entre em contato!] (https://www.linkedin.com/in/felipe-rodolfo/)
