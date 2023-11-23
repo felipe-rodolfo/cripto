@@ -27,3 +27,7 @@
   transform: scale(1.1);
   background-color: #30beff;
 }
+
+html {
+  scroll-behavior: smooth;
+}

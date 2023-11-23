@@ -1,28 +1,28 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Detail } from "./pages/Detail";
 import { NotFound } from "./pages/NotFound";
 import { Layout } from "./components/layout";
 
-
-const router = createBrowserRouter([
+const routes = createHashRouter([
   {
+    path: "/",
     element: <Layout />,
-    children:[
+    children: [
       {
-        path: "./",
+        path: "/", // Corrigido para "/#cripto"
         element: <Home />
       },
       {
-        path: "./detail/:cripto",
+        path: "detail/:cripto", // Corrigido para "#detail/:cripto"
         element: <Detail />
       },
       {
-        path: "*",
+        path: "*", // Corrigido para "#*"
         element: <NotFound />
       }
     ]
   }
-])
+]);
 
-export {router};
+export { routes };
